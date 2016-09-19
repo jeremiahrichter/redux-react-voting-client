@@ -12,9 +12,7 @@ export default React.createClass({
     },
     render: function () {
         return <div className="voting">
-            {this.props.winner?
-                <div ref="winner">The winner is {this.props.winner}!</div>:
-                this.getPair().map(entry =>
+            {this.getPair().map(entry =>
                 <button key={entry}
                         onClick={() => this.props.vote(entry)}
                         disabled={this.props.isDisabled()}>
