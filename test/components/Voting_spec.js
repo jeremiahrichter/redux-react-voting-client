@@ -1,13 +1,13 @@
 import React from "react";
 import {renderIntoDocument, scryRenderedDOMComponentsWithTag, Simulate} from "react-addons-test-utils";
-import Voting from "../../src/components/Voting";
+import Vote from "../../src/components/Vote";
 import {expect} from "chai";
 
 describe('Voting', () => {
 
     it('renders a pair of buttons', () => {
         const component = renderIntoDocument(
-            <Voting pair={["Trainspotting", "28 Days Later"]}/>
+            <Vote pair={["Trainspotting", "28 Days Later"]}/>
         );
         const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
 
@@ -21,7 +21,7 @@ describe('Voting', () => {
         const vote = (entry) => votedWith = entry;
 
         const component = renderIntoDocument(
-            <Voting pair={["Trainspotting", "28 Days Later"]}
+            <Vote pair={["Trainspotting", "28 Days Later"]}
                     vote={vote}/>
         );
         const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
