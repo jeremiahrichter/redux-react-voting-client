@@ -1,13 +1,13 @@
-import Vote from "Vote";
-import Winner from "Winner";
-import React from "react";
+import React from 'react';
+import Winner from './Winner';
+import Vote from './Vote';
 
 export default React.createClass({
-    render: () => {
+    render: function() {
         return <div>
             {this.props.winner ?
-                <Winner ref="winner" winner="{this.props.winner}"/> :
-                <Vote {...this.props}/>}
+                <Winner ref="winner" winner={this.props.winner} /> :
+                <Vote {...this.props} />}
         </div>;
     }
 });
