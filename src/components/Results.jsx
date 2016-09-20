@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 export default React.createClass({
     mixins: [PureRenderMixin],
-    getVotes: function () {
+    getVotes: function (entry) {
         if (this.props.tally && this.props.tally.has(entry)) {
             return this.props.tally.get(entry);
         } else {
