@@ -67,11 +67,31 @@ describe('Voting', () => {
         expect(winner.textContent).to.contain('Trainspotting');
     });
 
+    it('renders as a pure component', () => {
+        const pair = ['Trainspotting', '28 Days Later'];
+        const container = document.createElement('div');
+        let component = ReactDOM.render(
+            <Voting pair={pair}/>,
+            container
+        );
+
+        let firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
+        expect(firstButton.textContent).to.equal('Trainspotting');
+
+        pair[0] = 'Sunshine';
+        component = ReactDOM.render(
+            <Voting pair={pair}/>,
+            container
+        );
+        firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
+        expect(firstButton.textContent).to.equal('Trainspotting');
+    });
+
     it('does update DOM when prop changes', () => {
         const pair = List.of('Trainspotting', '28 Days Later');
         const container = document.createElement('div');
         let component = ReactDOM.render(
-            <Voting pair={pair} />,
+            <Voting pair={pair}/>,
             container
         );
 
@@ -80,7 +100,7 @@ describe('Voting', () => {
 
         const newPair = pair.set(0, 'Sunshine');
         component = ReactDOM.render(
-            <Voting pair={newPair} />,
+            <Voting pair={newPair}/>,
             container
         );
         firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
