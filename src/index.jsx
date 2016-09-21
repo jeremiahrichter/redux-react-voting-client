@@ -4,8 +4,24 @@ import Voting from "./components/Voting";
 import {Route, Router, hashHistory} from "react-router";
 import App from "./components/App"
 import Results from "./components/Results";
+import reducer from './reducer';
+import {createStore} from 'redux';
 
-const pair = ['Trainspotting', '28 Days Later'];
+const store = createStore(reducer);
+store.dispatch({
+    type: 'SET_STATE',
+    state: {
+        vote: {
+            pair: [
+                'Trainspotting',
+                '28 Days Later'
+            ],
+            tally: {
+                'Sunshine': 2
+            }
+        }
+    }
+});
 
 const routes = <Route component={App}>
     <Route path="/results" component={Results}/>
