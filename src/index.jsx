@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import VotingContainer from "./components/Voting";
+import {VotingContainer} from "./components/Voting";
 import {Route, Router, hashHistory} from "react-router";
 import App from "./components/App"
-import Results from "./components/Results";
+import {ResultsContainer} from "./components/Results";
 import reducer from './reducer';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
@@ -25,7 +25,7 @@ store.dispatch({
 });
 
 const routes = <Route component={App}>
-    <Route path="/results" component={Results}/>
+    <Route path="/results" component={ResultsContainer}/>
     <Route path="/" component={VotingContainer}/>
 </Route>;
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import Winner from './Winner'
+import {connect} from 'react-redux';
 
-export default React.createClass({
+export const Results = React.createClass({
     mixins: [PureRenderMixin],
     getVotes: function (entry) {
         if (this.props.tally && this.props.tally.has(entry)) {
@@ -15,26 +16,36 @@ export default React.createClass({
         return this.props.pair || [];
     },
     render: function () {
-        return this.props.winner?
-            <Winner winner={this.props.winner} ref="winner"/>:
+        return this.props.winner ?
+            <Winner winner={this.props.winner} ref="winner"/> :
             <div className="results">
-            <div className="tally">
-                {this.getPair().map(entry =>
-                    <div key={entry} className="entry">
-                        <h1>{entry}</h1>
-                        <div className="voteCount">
-                            {this.getVotes(entry)}
+                <div className="tally">
+                    {this.getPair().map(entry =>
+                        <div key={entry} className="entry">
+                            <h1>{entry}</h1>
+                            <div className="voteCount">
+                                {this.getVotes(entry)}
+                            </div>
                         </div>
-                    </div>
-                )}
-            </div>
-            <div className="management">
-                <button ref="next"
-                        className="next"
-                        onClick={this.props.next}>
-                    Next
-                </button>
-            </div>
-        </div>;
+                    )}
+                </div>
+                <div className="management">
+                    <button ref="next"
+                            className="next"
+                            onClick={this.props.next}>
+                        Next
+                    </button>
+                </div>
+            </div>;
     }
 });
+
+function mapStateToProps(state) {
+    return {
+        pair: state.getIn(['vote', 'pair']),
+        winner: state.get('winner'),
+        tally: state.getIn(['vote', 'tally'])
+    }
+}
+
+export const ResultsContainer = connect(mapStateToProps)(Results);
