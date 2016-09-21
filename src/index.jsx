@@ -6,6 +6,7 @@ import App from "./components/App"
 import Results from "./components/Results";
 import reducer from './reducer';
 import {createStore} from 'redux';
+import {Provider} from 'react-redux';
 
 const store = createStore(reducer);
 store.dispatch({
@@ -29,6 +30,8 @@ const routes = <Route component={App}>
 </Route>;
 
 ReactDOM.render(
-    <Router history={hashHistory}>{routes}</Router>,
+    <Provider store={store}>
+        <Router history={hashHistory}>{routes}</Router>
+    </Provider>,
     document.getElementById('app')
 );
