@@ -8,15 +8,13 @@ import reducer from './reducer';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import io from 'socket.io-client';
+import {setState} from './action_creators'
 
 const store = createStore(reducer);
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
 socket.on('state', state => {
-    store.dispatch({
-        type: 'SET_STATE',
-        state: state
-    });
+    store.dispatch(setState(state));
 });
 
 const routes = <Route component={App}>
